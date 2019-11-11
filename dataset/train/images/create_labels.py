@@ -1,16 +1,18 @@
 import sys
+import glob
 
 text = ''
-filename = sys.argv[1]
-with open(filename) as f:
-    for line in f.readlines():
-    	if ".jpg" in line:
-    	   if "right" in line:
-    	   	label = '1'
-    	   elif "left" in line:
-    	   	label = '2'
-    	   elif "center" in line:
-    	   	label = '3'
-    	   text += '"'+line[:-1]+'", '+label+'\n'
-with open(filename[:-4]+'_out.csv','w+') as f:
+
+files = glob.glob('*.jpg')
+for line in files:
+	if "right" in line:
+		label = '1'
+	elif "left" in line:
+		label = '2'
+	elif "center" in line or "centre" in line:
+		label = '3'
+	else:
+		continue
+	text += '"'+line+'", '+label+'\n'
+with open('labels.csv','w+') as f:
 	f.write(text)
