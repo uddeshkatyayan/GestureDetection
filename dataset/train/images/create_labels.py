@@ -11,6 +11,8 @@ for line in files:
 		label = '2'
 	elif "center" in line or "centre" in line:
 		label = '3'
+	elif "back" in line:
+		label = '0'
 	else:
 		continue
 	text += '"'+line+'", '+label+'\n'
